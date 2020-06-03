@@ -4,6 +4,7 @@
   border-style: solid;
   border-color: black
 }
+
 .btn {
   height: 40px;
   width: 80px;
@@ -12,3 +13,10 @@
   border-radius: 8px;
 }
 
+input[type="text"] {
+  height: 20px;
+  width: 70px;
+  border-radius: 5px;
+  border-style: solid;
+  border-color: black;
+}

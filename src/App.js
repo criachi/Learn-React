@@ -3,10 +3,17 @@ import logo from './logo.svg';
 import './App.css';
 
 class ColoredRect extends React.Component {
-
   render() {
     return (
-      <div className="rect" style={{ backgroundColor: this.props.color }}></div>
+      <div className="rect" style={{ backgroundColor: this.props.color, borderRadius: this.props.borderRadius }}> {this.props.children} </div>
+    )
+  }
+}
+
+class TextBoxContainer extends React.Component {
+  render() {
+    return (
+      <ColoredRect color="#FFFFFF" borderRadius="15px"> <input type="text" id={this.props.textBoxID} readOnly={this.props.isReadOnly} ></input> </ColoredRect>
     )
   }
 }
@@ -35,6 +42,9 @@ class App extends React.Component {
            <ColoredRect color={this.state.altColor2}/>
            <button className="btn" onClick={this.updateRectColors}>Button</button>
            <button className="btn" onClick={this.resetRectColors}>Reset</button>
+           <TextBoxContainer textBoxID="1" isReadOnly={false}/>
+           <TextBoxContainer textBoxID="2" isReadOnly={true}/>
+           <TextBoxContainer textBoxID="3" isReadOnly={true}/>
          </body>
       </div>
     );
