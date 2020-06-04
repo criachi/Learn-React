@@ -1,8 +1,28 @@
-.rect {
+.App {
+  display: grid;
+  grid-template-columns: 300px 300px 300px;
+}
+
+.rect, .textRect {
   height: 100px;
   width: 200px;
   border-style: solid;
   border-color: black
+}
+
+.rect {
+  grid-row: 2;
+}
+
+.container {
+  grid-row: 3;
+  display: grid;
+  grid-template-columns: 220px 220px 220px;
+  margin: 10px
+}
+
+.textRect {
+  grid-row: 1;
 }
 
 .btn {
@@ -21,5 +41,6 @@ input[type="text"] {
   border-radius: 5px;
   border-style: solid;
   border-color: black;
-  float: right
+  float: right;
+  margin: 20% 30%
 }

@@ -4,7 +4,7 @@ import './App.css';
 class ColoredRect extends React.Component {
   render() {
     return (
-      <div className="rect" style={{ backgroundColor: this.props.color, borderRadius: this.props.borderRadius }}> {this.props.children} </div>
+      <div className={this.props.className} style={{ backgroundColor: this.props.color, borderRadius: this.props.borderRadius }}> {this.props.children} </div>
     )
   }
 }
@@ -21,7 +21,7 @@ class TextBoxContainer extends React.Component {
 
   render() {
     return (
-      <ColoredRect color="#FFFFFF" borderRadius="15px"> <input type="text" id={this.props.textBoxID} readOnly={this.props.isReadOnly} value={this.props.text} onChange={this.handleInputChange}></input> </ColoredRect>
+      <ColoredRect className="textRect" color="#FFFFFF" borderRadius="15px"> <input type="text" id={this.props.textBoxID} readOnly={this.props.isReadOnly} value={this.props.text} onChange={this.handleInputChange}></input> </ColoredRect>
     )
   }
 }
@@ -41,7 +41,7 @@ class MultiTextBoxContainer extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="container"> 
         <TextBoxContainer textBoxID="inputBox" isReadOnly={false} text={this.state.originalString} onTextChange={this.handleInputChange}/>
         <TextBoxContainer textBoxID="reverseBox" isReadOnly={true} text={this.state.originalString.split("").reverse().join("")}/>
         <TextBoxContainer textBoxID="InputLenBox" isReadOnly={true} text={this.state.originalString.length}/>
@@ -72,8 +72,8 @@ class App extends React.Component {
         <div className="App">
            <button className="btn" onClick={this.updateRectColors}>Button</button>
            <button className="btn" onClick={this.resetRectColors}>Reset</button>
-           <ColoredRect color={this.state.altColor1}/>
-           <ColoredRect color={this.state.altColor2}/>
+           <ColoredRect className="rect" color={this.state.altColor1}/>
+           <ColoredRect className="rect" color={this.state.altColor2}/>
            <MultiTextBoxContainer/>
         </div>
       </body>
