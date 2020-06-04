@@ -1,5 +1,4 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 
 class ColoredRect extends React.Component {
@@ -11,9 +10,42 @@ class ColoredRect extends React.Component {
 }
 
 class TextBoxContainer extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleInputChange = this.handleInputChange.bind(this);
+  }
+
+  handleInputChange(e) {
+    this.props.onTextChange(e.target.value);
+  }
+
   render() {
     return (
-      <ColoredRect color="#FFFFFF" borderRadius="15px"> <input type="text" id={this.props.textBoxID} readOnly={this.props.isReadOnly} ></input> </ColoredRect>
+      <ColoredRect color="#FFFFFF" borderRadius="15px"> <input type="text" id={this.props.textBoxID} readOnly={this.props.isReadOnly} value={this.props.text} onChange={this.handleInputChange}></input> </ColoredRect>
+    )
+  }
+}
+
+class MultiTextBoxContainer extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      originalString: ""
+    };
+    this.handleInputChange = this.handleInputChange.bind(this);
+  }
+
+  handleInputChange(string) {
+    this.setState({ originalString: string });
+  }
+
+  render() {
+    return (
+      <div>
+        <TextBoxContainer textBoxID="inputBox" isReadOnly={false} text={this.state.originalString} onTextChange={this.handleInputChange}/>
+        <TextBoxContainer textBoxID="reverseBox" isReadOnly={true} text={this.state.originalString.split("").reverse().join("")}/>
+        <TextBoxContainer textBoxID="InputLenBox" isReadOnly={true} text={this.state.originalString.length}/>
+      </div> 
     )
   }
 }
@@ -36,17 +68,15 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className="App">
-         <body>
-           <ColoredRect color={this.state.altColor1}/>
-           <ColoredRect color={this.state.altColor2}/>
+      <body>
+        <div className="App">
            <button className="btn" onClick={this.updateRectColors}>Button</button>
            <button className="btn" onClick={this.resetRectColors}>Reset</button>
-           <TextBoxContainer textBoxID="1" isReadOnly={false}/>
-           <TextBoxContainer textBoxID="2" isReadOnly={true}/>
-           <TextBoxContainer textBoxID="3" isReadOnly={true}/>
-         </body>
-      </div>
+           <ColoredRect color={this.state.altColor1}/>
+           <ColoredRect color={this.state.altColor2}/>
+           <MultiTextBoxContainer/>
+        </div>
+      </body>
     );
   }
 }
